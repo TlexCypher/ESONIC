@@ -3,8 +3,9 @@ const EnglishWordModel = require("../models/EnglishWordModel");
 const englishWordsRouter = express.Router();
 
 /* Api for adding new english word to database. */
-englishWordsRouter.post("/addNewWord", async (req, res) => {
+englishWordsRouter.post("/addWord", async (req, res) => {
   const { englishContent, japaneseMeaning } = req.body;
+
   try {
     const result = await EnglishWordModel.findOne({ englishContent: englishContent });
     if (result) {
@@ -57,7 +58,7 @@ englishWordsRouter.delete("/deleteWord/:id", async (req, res) => {
  * So we should handle the case, for instance, user request 50 words, but database has only 20 words.
  * App should say this fact to user, and we should min(number_in_database, number_requested_by_user).
  */
-englishWordsRouter.get("/takeExam/:numOfWordsFromUser", async (req, res) => {
+englishWordsRouter.get("/examine/:numOfWordsFromUser", async (req, res) => {
   const { numOfWordsFromUser } = req.params;
   const allWords = await EnglishWordModel.find({});
   const numOfWordsInDB = allWords.length;

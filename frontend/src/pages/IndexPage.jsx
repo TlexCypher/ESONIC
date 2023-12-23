@@ -8,12 +8,12 @@ const IndexPage = () => {
 
   const handleAddNewWord = useCallback((e) => {
     e.preventDefault()
-    addNewWordNavigate("/addNewWord")
+    addNewWordNavigate("/english/addWord")
   }, [addNewWordNavigate])
 
   const handleExamine = useCallback((e) => {
     e.preventDefault()
-    examineNavigate("/examine")
+    examineNavigate("/english/examine")
   }, [examineNavigate])
 
   return (
