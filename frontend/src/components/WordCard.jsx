@@ -13,14 +13,14 @@ const WordCard = ({ cardIndex, englishContent, jpMeanings }) => {
   }, [])
 
   return (
-    <Card>
+    <Card width={'300px'}>
       <CardHeader>
-        <Heading>Number{cardIndex}</Heading>
+        <Heading>Number{cardIndex + 1}</Heading>
       </CardHeader>
       <CardBody>
         <VStack>
           <Heading>{englishWord}</Heading>
-          <HStack>
+          <VStack>
             <Box
               border={"gray.400"}
               borderRadius={"lg"}
@@ -29,7 +29,7 @@ const WordCard = ({ cardIndex, englishContent, jpMeanings }) => {
                 <Text>{element}</Text>
               )}
             </Box>
-          </HStack>
+          </VStack>
         </VStack>
       </CardBody>
       <CardFooter>

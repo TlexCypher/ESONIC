@@ -20,19 +20,27 @@ const ExaminePage = () => {
     setSelectedJpMeanings(jpMeanings)
   }
 
-  const getCandidates = () => {
-    let randomInc = Math.floor(Math.random() * selectedJpMeanings.length)
-    let currentIndex = Math.floor(Math.random() * selectedJpMeanings.length)
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  const getCandidates = (answerJpMeaning) => {
     const usedIndex = new Set()
     const maxSize = 3
     const candidates = []
-    while (usedIndex.size < maxSize) {
-      if (usedIndex.has(currentIndex)) continue
-      usedIndex.add(currentIndex)
-      candidates.push(selectedJpMeanings[currentIndex])
-      currentIndex += randomInc
-      currentIndex %= selectedJpMeanings.length
+    candidates.push(answerJpMeaning)
+    while (candidates.length < maxSize) {
+      const randomIndex = Math.floor(Math.random() * selectedJpMeanings.length);
+      if (!usedIndex.has(randomIndex) && selectedJpMeanings[randomIndex] !== answerJpMeaning) {
+        usedIndex.add(randomIndex);
+        candidates.push(selectedJpMeanings[randomIndex]);
+      }
     }
+    shuffleArray(candidates)
     return candidates
   }
 
@@ -66,9 +74,8 @@ const ExaminePage = () => {
             <WordCard
               cardIndex={index}
               englishContent={word.englishContent}
-              jpMeanings={getCandidates()}
+              jpMeanings={getCandidates(word.japaneseMeaning)}
             />
-
           ))
         )}
       </VStack>
