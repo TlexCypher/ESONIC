@@ -75,6 +75,7 @@ const ExaminePage = () => {
               cardIndex={index}
               englishContent={word.englishContent}
               jpMeanings={getCandidates(word.japaneseMeaning)}
+              truthAnswer={word.japaneseMeaning}
             />
           ))
         )}
