@@ -3,7 +3,9 @@
 # Getting Started 
 This is simple.You would use below command.  
 This application is made for only *Japanese*.(Sorry guys, because I'm Japanese...)  
-`git clone git@github.com:TlexCypher/ESONIC.git`  
+```vim
+git clone git@github.com:TlexCypher/ESONIC.git
+```  
 # What we can do?
 This application has two functionalities.  
 First, **Add New Word**.  
