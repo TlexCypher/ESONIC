@@ -1,13 +1,21 @@
-import { VStack, Heading, Select, Center, Button } from '@chakra-ui/react'
+import { VStack, Heading, Select, Center, Button, HStack } from '@chakra-ui/react'
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import WordCard from '../components/WordCard'
+import NextButton from './NextButton'
+import PrevButton from './PrevButton'
 
 const ExaminePage = () => {
   const [wordCount, setWordCount] = useState("")
   const [selectedWords, setSelectedWords] = useState([])
   const [selectedJpMeanings, setSelectedJpMeanings] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const handleSetCurrentIndex = (index) => {
+    setCurrentIndex(index)
+    console.log(currentIndex)
+  }
 
   const handleWordCount = async () => {
     const { data } = await axios.get("/english/examine/" + wordCount)
@@ -70,14 +78,20 @@ const ExaminePage = () => {
           </Button>
 
         ) : (
-          selectedWords.map((word, index) => (
-            <WordCard
-              cardIndex={index}
-              englishContent={word.englishContent}
-              jpMeanings={getCandidates(word.japaneseMeaning)}
-              truthAnswer={word.japaneseMeaning}
-            />
-          ))
+          <>
+            <VStack>
+              <WordCard
+                cardIndex={currentIndex}
+                englishContent={selectedWords[currentIndex].englishContent}
+                jpMeanings={getCandidates(selectedWords[currentIndex].japaneseMeaning)}
+                truthAnswer={selectedWords[currentIndex].japaneseMeaning}
+              />
+              <HStack mt="8px">
+                <PrevButton totalLength={wordCount} index={currentIndex} setIndex={handleSetCurrentIndex} />
+                <NextButton totalLength={wordCount} index={currentIndex} setIndex={handleSetCurrentIndex} />
+              </HStack>
+            </VStack>
+          </>
         )}
       </VStack>
     </Center>

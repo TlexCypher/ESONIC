@@ -6,23 +6,31 @@ import AnswerCandidate from "../pages/AnswerCandidate.jsx";
 import NoCandidate from "../pages/NoCandidate.jsx";
 
 const WordCard = ({ cardIndex, englishContent, jpMeanings, truthAnswer }) => {
-    const [answer, setAnswer] = useState('')
-    const [englishWord, setEnglishWord] = useState('')
-    const [candidates, setCandidates] = useState([])
-    const [answerStatus, setAnswerStatus] = useState('')
+  const [answer, setAnswer] = useState('')
+  const [englishWord, setEnglishWord] = useState('')
+  const [candidates, setCandidates] = useState([])
+  const [answerStatus, setAnswerStatus] = useState('')
 
   useEffect(() => {
     setEnglishWord(englishContent)
     setCandidates(jpMeanings)
   }, [])
-    const handleSelectAnswer = (word) => {
-        setAnswer(word)
-    }
-    const handleTryAgain = () => {
-        // setEnglishWord('')
-        setAnswer('')
-        setAnswerStatus('')
-    }
+
+  useEffect(() => {
+    setEnglishWord(englishContent)
+    setCandidates(jpMeanings)
+    setAnswerStatus('')
+    setAnswer('')
+  }, [cardIndex])
+
+  const handleSelectAnswer = (word) => {
+    setAnswer(word)
+  }
+  const handleTryAgain = () => {
+    // setEnglishWord('')
+    setAnswer('')
+    setAnswerStatus('')
+  }
 
   return (
     <Card width={'300px'}>
@@ -38,27 +46,27 @@ const WordCard = ({ cardIndex, englishContent, jpMeanings, truthAnswer }) => {
               borderRadius={"lg"}
             >
               {candidates.map((element) =>
-                  <JapaneseWordCandidate
-                      word={element}
-                      handleAnswer={handleSelectAnswer}
-                  />
+                <JapaneseWordCandidate
+                  word={element}
+                  handleAnswer={handleSelectAnswer}
+                />
               )}
             </Box>
           </VStack>
         </VStack>
       </CardBody>
       <CardFooter>
-          {answer === '' ? (
-              <NoCandidate/>
-          ) : (
-              <AnswerCandidate
-                  answer={answer}
-                  truthAnswer={truthAnswer}
-                  answerStatus={answerStatus}
-                  handleStatus={setAnswerStatus}
-                  handleTryAgain={handleTryAgain}
-              />
-          )}
+        {answer === '' ? (
+          <NoCandidate />
+        ) : (
+          <AnswerCandidate
+            answer={answer}
+            truthAnswer={truthAnswer}
+            answerStatus={answerStatus}
+            handleStatus={setAnswerStatus}
+            handleTryAgain={handleTryAgain}
+          />
+        )}
       </CardFooter>
     </Card>
   )
