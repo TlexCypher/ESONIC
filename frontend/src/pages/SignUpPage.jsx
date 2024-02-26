@@ -1,30 +1,36 @@
-import { Box, Button, FormControl, FormHelperText, FormLabel, HStack, Heading, Input, Spacer, Text, VStack } from '@chakra-ui/react';
-import axios from 'axios';
-import { useState } from 'react';
+import { Box, Button, FormControl, FormLabel, Heading, Input, VStack } from '@chakra-ui/react'
+import axios from 'axios'
+import React from 'react'
+import { useState } from 'react'
 
-/* We don't know the way how to have db for each users. So, currently, there's nothing that I can do.
- * After learning this, I would work on.
- * */
-
-const LoginPage = () => {
+const SignUpPage = () => {
   const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const handlePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password)
-  }
 
   const handleUsername = (e) => {
     const username = e.target.value;
-    setUsername(username)
+    setUsername(username);
   }
 
-  const handleSubmitLoginInfo = async (e) => {
-    const { data } = await axios.post("/auth/login", {
+  const handleEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+  }
+
+  const handlePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  }
+
+  const handleSubmitSignUpInfo = async (e) => {
+    /*push user info into db. */
+    const { data } = await axios.post("/auth/register", {
       username: username,
+      email: email,
       password: password
-    })
+    });
+    /*After register, start to navigate to other page.*/
   }
 
   return (
@@ -39,7 +45,7 @@ const LoginPage = () => {
         borderRadius={"xl"}
         borderColor={"purple.400"}
       >
-        <Heading mb="20px">Login</Heading>
+        <Heading mb="20px">SignUp</Heading>
         <FormLabel isRequired>Username</FormLabel>
         <FormControl isRequired>
           <Input
@@ -47,6 +53,15 @@ const LoginPage = () => {
             placeholder='sample'
             name="username"
             onChange={handleUsername}
+          />
+        </FormControl>
+        <FormLabel isRequired mt="20px">Email</FormLabel>
+        <FormControl isRequired>
+          <Input
+            type="email"
+            placeholder='sample@sample.com'
+            name="email"
+            onChange={handleEmail}
           />
         </FormControl>
         <FormControl isRequired mt="20px">
@@ -61,14 +76,15 @@ const LoginPage = () => {
         <VStack>
           <Button
             colorScheme='purple' mt="20px" px="20px" py="5px"
-            onClick={handleSubmitLoginInfo}
+            onClick={handleSubmitSignUpInfo}
           >
-            Login
+            SignUp
           </Button>
         </VStack>
       </Box >
     </VStack >
+
   )
 }
 
-export default LoginPage
+export default SignUpPage

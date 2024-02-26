@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 const cors = require('cors')
 const englishWordsRouter = require("./routes/englishWordsRouter");
 const { default: axios } = require("axios");
-/* const authRouter = require("./routes/authRouter"); */
+const authRouter = require("./routes/authRouter");
 const dotenv = require("dotenv").config();
 
 passport.serializeUser(function(user, done) {
@@ -43,9 +43,9 @@ app.use(cors({
   credentials: true,
   origin: "http://localhost:5173"
 }))
-app.use("/english", englishWordsRouter);
 
-/*app.use("/auth", authRouter);*/
+app.use("/english", englishWordsRouter);
+app.use("/auth", authRouter);
 
 
 mongoose.connect(process.env.MONGODB_URL);
