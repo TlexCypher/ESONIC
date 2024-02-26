@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const englishWord = new mongoose.Schema({
+  username: String,
   englishContent: String,
   japaneseMeaning: String,
 });
