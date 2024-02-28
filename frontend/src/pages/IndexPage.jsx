@@ -1,19 +1,20 @@
 import { Button, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import React, { useCallback } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const IndexPage = () => {
   const addNewWordNavigate = useNavigate()
   const examineNavigate = useNavigate()
+  const { username } = useParams()
 
   const handleAddNewWord = useCallback((e) => {
     e.preventDefault()
-    addNewWordNavigate("/english/addWord")
+    addNewWordNavigate(`english/addWord`)
   }, [addNewWordNavigate])
 
   const handleExamine = useCallback((e) => {
     e.preventDefault()
-    examineNavigate("/english/examine")
+    examineNavigate(`english/examine`)
   }, [examineNavigate])
 
   return (
