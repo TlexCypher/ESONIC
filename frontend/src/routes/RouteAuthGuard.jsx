@@ -10,6 +10,8 @@ const RouteAuthGuard = ({ component }) => {
       pageType: "private",
       username: authUsername
     };
+  } else {
+    alert("コンテンツの閲覧にはログインが必要です。");
   }
   if (authUser) {
     return <>{component}</>

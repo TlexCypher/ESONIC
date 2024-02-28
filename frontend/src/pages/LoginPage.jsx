@@ -18,9 +18,6 @@ const LoginPage = () => {
     setPassword(password)
   }
 
-  const removeSessionStorage = () => {
-    sessionStorage.removeItem("authUsername")
-  }
 
   const setSessionStorage = (authUsername) => {
     sessionStorage.setItem("authUsername", authUsername)
@@ -46,9 +43,7 @@ const LoginPage = () => {
     }
   }
 
-  useEffect(() => {
-    removeSessionStorage()
-  }, [])
+  sessionStorage.removeItem("authUsername")
 
   return (
     <VStack mt="100px">

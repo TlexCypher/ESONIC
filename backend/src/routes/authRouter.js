@@ -44,7 +44,6 @@ authRouter.post("/register", async (req, res) => {
 /* Api for handling login of existing user. */
 authRouter.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password)
   const hasBeenRegistered = await getHasBeenRegistered(username, password)
   if (!hasBeenRegistered) {
     res.status(400).send("Can't find such user.");
@@ -69,5 +68,8 @@ authRouter.post("/login", async (req, res) => {
 
 /* Api for handling logout of existing user. */
 authRouter.post("/logout", (req, res) => {
-
+  res.clearCookie('jwt', { httpOnly: true })
+  res.status(200).json({
+    msg: "HTTPOnly Cookie clear."
+  })
 });
