@@ -1,12 +1,14 @@
 import { Box, Button, FormControl, FormLabel, Heading, Input, VStack } from '@chakra-ui/react'
-import axios from 'axios'
+import axios, { HttpStatusCode } from 'axios'
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const SignUpPage = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const handleUsername = (e) => {
     const username = e.target.value;
@@ -25,11 +27,19 @@ const SignUpPage = () => {
 
   const handleSubmitSignUpInfo = async (e) => {
     /*push user info into db. */
-    const { data } = await axios.post("/auth/register", {
+    const res = await axios.post("/auth/register", {
       username: username,
       email: email,
       password: password
     });
+
+    if (res.status == HttpStatusCode.Ok) {
+      console.log("Registration success.")
+      /*TODO: Should include username into endpoint path.*/
+      navigate("/")
+    } else {
+      console.log("Registration failed.")
+    }
     /*After register, start to navigate to other page.*/
   }
 

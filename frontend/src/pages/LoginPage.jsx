@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, FormHelperText, FormLabel, HStack, Heading, Input, Spacer, Text, VStack } from '@chakra-ui/react';
-import axios from 'axios';
+import axios, { HttpStatusCode } from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /* We don't know the way how to have db for each users. So, currently, there's nothing that I can do.
  * After learning this, I would work on.
@@ -9,6 +10,7 @@ import { useState } from 'react';
 const LoginPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const handlePassword = (e) => {
     const password = e.target.value;
@@ -21,10 +23,18 @@ const LoginPage = () => {
   }
 
   const handleSubmitLoginInfo = async (e) => {
-    const { data } = await axios.post("/auth/login", {
+    const res = await axios.post("/auth/login", {
       username: username,
       password: password
     })
+    if (res.status === HttpStatusCode.Ok) {
+      console.log("Login success")
+      /*TODO: Should include username into endpoint path.*/
+      navigate("/")
+
+    } else {
+      console.log("Login failed.")
+    }
   }
 
   return (

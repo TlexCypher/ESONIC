@@ -6,6 +6,8 @@ const express = require("express");
 const UserModel = require("../models/UserModel");
 const authRouter = express.Router();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
+require('dotenv').config()
 
 module.exports = authRouter;
 
@@ -27,7 +29,7 @@ const getHasBeenRegistered = async (username, password) => {
 authRouter.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   /*TODO: should be changed */
-  const hasBeenRegistered = getHasBeenRegistered(username, password)
+  const hasBeenRegistered = await getHasBeenRegistered(username, password)
   if (hasBeenRegistered) {
     res.status(400).send("You have been already registered.");
     return;
@@ -42,14 +44,14 @@ authRouter.post("/register", async (req, res) => {
 /* Api for handling login of existing user. */
 authRouter.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const hasBeenRegistered = getHasBeenRegistered(username, password)
+  const hasBeenRegistered = await getHasBeenRegistered(username, password)
   if (!hasBeenRegistered) {
     res.status(400).send("Can't find such user.");
     return;
   } else {
     /*jwt flow*/
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
-    const token = jwt.Sign({
+    const token = jwt.sign({
       username
     },
       jwtSecretKey,
