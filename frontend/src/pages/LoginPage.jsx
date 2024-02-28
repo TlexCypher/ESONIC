@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, FormHelperText, FormLabel, HStack, Heading, Input, Spacer, Text, VStack } from '@chakra-ui/react';
 import axios, { HttpStatusCode } from 'axios';
-import { useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 /* We don't know the way how to have db for each users. So, currently, there's nothing that I can do.
@@ -17,6 +18,14 @@ const LoginPage = () => {
     setPassword(password)
   }
 
+  const removeSessionStorage = () => {
+    sessionStorage.removeItem("authUsername")
+  }
+
+  const setSessionStorage = (authUsername) => {
+    sessionStorage.setItem("authUsername", authUsername)
+  }
+
   const handleUsername = (e) => {
     const username = e.target.value;
     setUsername(username)
@@ -29,13 +38,17 @@ const LoginPage = () => {
     })
     if (res.status === HttpStatusCode.Ok) {
       console.log("Login success")
-      /*TODO: Should include username into endpoint path.*/
-      navigate("/")
-
+      const jwtToken = jwtDecode(res.data.token)
+      setSessionStorage(jwtToken.username)
+      navigate(`/${username}`)
     } else {
       console.log("Login failed.")
     }
   }
+
+  useEffect(() => {
+    removeSessionStorage()
+  }, [])
 
   return (
     <VStack mt="100px">

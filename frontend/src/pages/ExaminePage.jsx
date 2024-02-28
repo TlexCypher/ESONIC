@@ -14,7 +14,6 @@ const ExaminePage = () => {
 
   const handleSetCurrentIndex = (index) => {
     setCurrentIndex(index)
-    console.log(currentIndex)
   }
 
   const handleWordCount = async () => {

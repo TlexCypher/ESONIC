@@ -36,7 +36,7 @@ const SignUpPage = () => {
     if (res.status == HttpStatusCode.Ok) {
       console.log("Registration success.")
       /*TODO: Should include username into endpoint path.*/
-      navigate("/")
+      navigate(`/${username}`)
     } else {
       console.log("Registration failed.")
     }
