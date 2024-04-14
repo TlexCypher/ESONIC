@@ -45,7 +45,6 @@ npm run dev # バックエンドサーバーのスタート
 ## Usage Examples (Demo)
 
 - サインイン
-https://github.com/TlexCypher/ESONIC/blob/master/assets/SignInDemo.gif
 - サインアップ
 - サインアウト
 - 新しい単語の追加
