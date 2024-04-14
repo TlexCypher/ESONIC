@@ -52,6 +52,18 @@ https://github.com/TlexCypher/ESONIC/assets/144787772/3df580df-45ad-4581-a4c3-64
 
 https://github.com/TlexCypher/ESONIC/assets/144787772/f6b7c720-d28a-408c-ac93-0ea1b49f3bfa
 
+- 新規ワード追加機能
+
+
+https://github.com/TlexCypher/ESONIC/assets/144787772/f203f01b-274b-4238-8b3e-8fce0c5eda8b
+
+
+- 自分用のテスト作成機能
+
+
+https://github.com/TlexCypher/ESONIC/assets/144787772/daa477c6-a67a-4ee7-9c7e-c00d978f77a3
+
+
 
 
 
