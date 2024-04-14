@@ -37,7 +37,19 @@ authRouter.post("/register", async (req, res) => {
     /* hash password. */
     const hashedPassword = bcrypt.hashSync(password, 10)
     await UserModel.create({ username: username, email: email, password: hashedPassword })
-    res.status(200).send("Success to register.");
+    const jwtSecretKey = process.env.JWT_SECRET_KEY;
+    const token = jwt.sign({
+      username
+    },
+      jwtSecretKey,
+      {
+        "expiresIn": "1h"
+      }
+    );
+    res.cookie("jwt", token, { httpOnly: true, maxAge: 3600000 })
+    res.status(200).json({
+      token: token
+    })
   }
 });
 

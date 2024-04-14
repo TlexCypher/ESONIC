@@ -1,8 +1,21 @@
-import { Box, Button, FormControl, FormHelperText, FormLabel, HStack, Heading, Input, Spacer, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  HStack,
+  Heading,
+  Input,
+  Spacer,
+  Text,
+  VStack,
+  Center
+} from '@chakra-ui/react';
 import axios, { HttpStatusCode } from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 
 /* We don't know the way how to have db for each users. So, currently, there's nothing that I can do.
  * After learning this, I would work on.
@@ -57,9 +70,11 @@ const LoginPage = () => {
         borderRadius={"xl"}
         borderColor={"purple.400"}
       >
-        <Heading mb="20px">Login</Heading>
-        <FormLabel isRequired>Username</FormLabel>
+        <Center mb="20px" fontSize={"30"} fontWeight={"bold"}>Login</Center>
         <FormControl isRequired>
+          <FormLabel>
+            Username
+          </FormLabel>
           <Input
             type="text"
             placeholder='sample'
@@ -83,6 +98,15 @@ const LoginPage = () => {
           >
             Login
           </Button>
+          <Text
+              onClick={() => {navigate("/register")}}
+              textColor={"blue.400"}
+              fontWeight={"bold"}
+              fontSize={"xs"}
+              cursor={"pointer"}
+          >
+            Don't you have any account?
+          </Text>
         </VStack>
       </Box >
     </VStack >

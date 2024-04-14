@@ -14,6 +14,7 @@ const RouteAuthGuard = ({ component }) => {
     alert("コンテンツの閲覧にはログインが必要です。");
   }
   if (authUser) {
+    console.log("I'm here")
     return <>{component}</>
   } else {
     return <Navigate to="/login" />

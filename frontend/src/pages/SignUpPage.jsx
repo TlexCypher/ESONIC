@@ -1,8 +1,8 @@
-import { Box, Button, FormControl, FormLabel, Heading, Input, VStack } from '@chakra-ui/react'
+import {Box, Button, FormControl, FormLabel, Heading, Input, Text, VStack} from '@chakra-ui/react'
 import axios, { HttpStatusCode } from 'axios'
-import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {jwtDecode} from "jwt-decode";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState('')
@@ -25,7 +25,11 @@ const SignUpPage = () => {
     setPassword(password);
   }
 
-  const handleSubmitSignUpInfo = async (e) => {
+  const setSessionStorage = (authUsername) => {
+    sessionStorage.setItem("authUsername", authUsername)
+  }
+
+  const handleSubmitSignUpInfo = async () => {
     /*push user info into db. */
     const res = await axios.post("/auth/register", {
       username: username,
@@ -33,14 +37,14 @@ const SignUpPage = () => {
       password: password
     });
 
-    if (res.status == HttpStatusCode.Ok) {
+    if (res.status === HttpStatusCode.Ok) {
       console.log("Registration success.")
-      /*TODO: Should include username into endpoint path.*/
+      const jwtToken = jwtDecode(res.data.token)
+      setSessionStorage(jwtToken.username)
       navigate(`/${username}`)
     } else {
       console.log("Registration failed.")
     }
-    /*After register, start to navigate to other page.*/
   }
 
   return (
@@ -90,6 +94,15 @@ const SignUpPage = () => {
           >
             SignUp
           </Button>
+          <Text
+              onClick={() => {navigate("/login")}}
+              textColor={"blue.400"}
+              fontWeight={"bold"}
+              fontSize={"xs"}
+              cursor={"pointer"}
+          >
+            Have you registered?
+          </Text>
         </VStack>
       </Box >
     </VStack >
