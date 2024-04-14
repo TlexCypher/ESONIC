@@ -45,10 +45,15 @@ npm run dev # バックエンドサーバーのスタート
 ## Usage Examples (Demo)
 
 - サインイン
+
+https://github.com/TlexCypher/ESONIC/assets/144787772/3df580df-45ad-4581-a4c3-646ed0b8e8a3
+
 - サインアップ
-- サインアウト
-- 新しい単語の追加
-- 自分専用のテスト作成機能
+
+https://github.com/TlexCypher/ESONIC/assets/144787772/f6b7c720-d28a-408c-ac93-0ea1b49f3bfa
+
+
+
 
 ## Description
 
