@@ -40,7 +40,6 @@ npm install # 必要なパッケージをpackage.jsonを読んでインストー
 npm run dev # バックエンドサーバーのスタート
 ```
 
-ドメインも取得済みなので利用したい人は Usage Example をご覧になった後で URL から利用してください。
 
 ## Usage Examples (Demo)
 
